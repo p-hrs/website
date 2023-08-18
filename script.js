@@ -194,7 +194,7 @@ function setPaths () {
         const text_box_x = text_box_dim.left + text_box_dim.width/2 - project_dim.left;
         const text_box_y = text_box_dim.top + text_box_dim.height/2 - project_dim.top;
 
-        const curve = 140;///make proportional
+        const curve = 140;
         
         $paths.each(function () {
             const path = $(this)[0];
