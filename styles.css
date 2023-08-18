@@ -103,6 +103,7 @@ div {
     margin-top: 2vh;
     z-index: 5;
     width: 40vw;
+    min-width: fit-content;
 }
 
 .menu-button-container button {
