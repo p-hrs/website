@@ -98,10 +98,11 @@ div {
     border-radius: 9999px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: fit-content;
     margin-top: 2vh;
     z-index: 5;
+    width: 40vw;
 }
 
 .menu-button-container button {
@@ -114,8 +115,6 @@ div {
     background-color: transparent;
     border: none;
     margin: 2vh;
-    margin-left: 8vh;
-    margin-right: 8vh;
     cursor: pointer;
     display: none;
 }
