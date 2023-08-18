@@ -232,7 +232,7 @@ h1 {
 }
   
 #about img {
-    height: 70vh;
+    height: 70vmin;
     width: auto;
     border-radius: 1.7vh;
 }

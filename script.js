@@ -6,6 +6,7 @@ const $sections = $('.section');
 const $has_background = $("body, .section, .menu-button-container, .parallax-wrapper");
 
 window.addEventListener("scroll", updateBackground);
+window.addEventListener("load", updateBackground);
 
 function updateBackground() {
     var scroll = $window.scrollTop() + ($window.height() / 3);
@@ -50,15 +51,18 @@ window.addEventListener("scroll", updatePos);
 function setPos() {
     $main_titles.each(function() {
         const $main_title = $(this);
+        const id = $main_title.attr("id");
+        const $clones =  $clone_titles[id];
+        const scroll_speed = scroll_speeds[id];
+
+        const new_y = `translateY(${getOffset(scroll_speed)}px)`;
+        $main_title.css("transform", new_y);
+        
         const { 
             x: main_title_x, 
             y: main_title_y 
             } = $main_title[0].getBoundingClientRect();
         
-        const id = $main_title.attr("id");
-        const $clones =  $clone_titles[id];
-        const scroll_speed = scroll_speeds[id];
-
         $clones.each(function(){
             const $this = $(this); 
             const wrapper = $this.parent()[0]
@@ -67,9 +71,9 @@ function setPos() {
                 y: wrapper_y
                 } = wrapper.getBoundingClientRect();
 
-            $this.css("top", `${main_title_y - wrapper_y}px`);
+            $this.css("top", `${main_title_y - getOffset(scroll_speed) - wrapper_y}px`);
             $this.css("left", `${main_title_x - wrapper_x}px`);
-            
+            $this.css("transform", new_y);
             $this.fadeIn(1000);
         })
     })
@@ -84,8 +88,9 @@ function updatePos() {
         const id = $(this).attr("id");
         const $clones =  $clone_titles[id];
         const scroll_speed = scroll_speeds[id];
+        const offset = getOffset(scroll_speed);
 
-        const new_y = `translateY(${getOffset(scroll_speed)}px)`;
+        const new_y = `translate3d(0, ${offset}px, 0)`;
         
         $(this).css("transform", new_y);
         $clones.css("transform", new_y);
@@ -119,7 +124,7 @@ function scrollMenu() {
     var offset = getOffset(0.4);
     offset = Math.min(offset, screen_height * 0.85);
 
-    const new_y = `translate(-50%, ${-offset}px)`;
+    const new_y = `translate3d(-50%, ${-offset}px, 0)`;
 
     $menu.css("transform", new_y);
 }
@@ -244,7 +249,6 @@ function buttonAnimation (element) {
         click_length = click_length * 1000;
     }
     
-    console.log(click_length);
     setTimeout(function() {
         $element.removeClass("clicked");
     }, click_length);
