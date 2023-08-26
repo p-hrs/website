@@ -42,9 +42,155 @@ div {
 }
 
 
-/* Parallax Text Stuff */
+/* Site Traversal Stuff */
+.menu-button-container {
+    position: fixed;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    background-color: var(--init_back);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    margin-top: 2vh;
+    z-index: 5;
+    width: 40vw;
+    min-width: fit-content;
+}
+@media only screen and (max-width: 768px) {
+    .menu-button-container {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+}
+
+.menu-button-container button {
+    font-size: 3.5vmin;
+    font-family: sans-serif;
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+    padding: 1vh;
+    background-color: transparent;
+    border: none;
+    margin: 2vh;
+    cursor: pointer;
+    display: none;
+}
+
+.menu-button-container button:hover {
+    opacity: 0.6;
+}
+
+.top-arrow {
+    position: fixed;
+    top: 90%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    border: solid;
+    border-radius: .35vmin;
+    border-width: 0 .5vmin .5vmin 0;
+    padding: .5vmin;
+    transform: scale(5) rotate(-135deg);
+    -webkit-transform: scale(5) rotate(-135deg);
+    background-color: transparent;
+    cursor: pointer;
+    display: none;
+}
+@media only screen and (max-width: 768px) {
+    .top-arrow {
+        left: 93%;
+        border-width: 0 .6vmin .6vmin 0;
+    }
+}
+
+.top-arrow:hover {
+    opacity: 0.6;
+}
+
+
+/* General Stuff for the Sections */
+
+h1 {
+    font: bold 10vmin sans-serif;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.text-box {
+    height: fit-content;
+    border-radius: 5vmin;
+    border: 3vmin solid;
+    padding: 1vmin;
+
+    color: white;
+    font-family: sans-serif;
+    font-size: 3vmin;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    height: fit-content;
+    width: fit-content;
+    margin-left: 5vw;
+    z-index: 0;
+}
+
+.image-container::after {
+    content: '';
+    position: absolute;
+    top: 1.5vmin;
+    left: 1.5vmin;
+    right: -2.2vmin;
+    bottom: -1.6vmin;
+    border: 3px solid;
+    border-top: none;
+    border-left: none;
+    border-radius: 1.7vh;
+    transition: var(--smooth_transition);
+    z-index: -1;
+}
+
+.image-container:hover::after {
+    right: -1.6vmin;
+    bottom: -1.2vmin;
+}
+
+.connectors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.connectors path {
+    stroke-width: 2vh;
+}
+
+
+/* Top Section Stuff */
 :root {
     --name_colour: #e3af8d;
+}
+
+.section#top {
+    padding-top: 40vh;
+}
+
+@media only screen and (max-width: 768px) {
+    .section#top { 
+        padding-top: 0;
+        min-height: 80vh;
+    }
 }
 
 #name { /* my name at the top */
@@ -87,128 +233,26 @@ div {
     width: 100%;
 }
 
-
-/* Site Traversal Stuff */
-.menu-button-container {
-    position: fixed;
-    top: 85%;
-    left: 50%;
-    transform: translate(-50%, 0px);
-    background-color: var(--init_back);
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: fit-content;
-    margin-top: 2vh;
-    z-index: 5;
-    width: 40vw;
-    min-width: fit-content;
-}
-
-.menu-button-container button {
-    font-size: 3.5vmin;
-    font-family: sans-serif;
-    font-weight: bold;
-    white-space: nowrap;
-    text-align: center;
-    padding: 1vh;
-    background-color: transparent;
-    border: none;
-    margin: 2vh;
-    cursor: pointer;
-    display: none;
-}
-
-.menu-button-container button:hover {
-    opacity: 0.6;
-}
-
-.top-arrow {
-    position: fixed;
-    top: 90%;
-    left: 95%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-    border: solid;
-    border-radius: .35vmin;
-    border-width: 0 .5vmin .5vmin 0;
-    padding: .5vmin;
-    transform: scale(5) rotate(-135deg);
-    -webkit-transform: scale(5) rotate(-135deg);
-    background-color: transparent;
-    cursor: pointer;
-    display: none;
-}
-
-.top-arrow:hover {
-    opacity: 0.6;
-}
-
-
-/* General Stuff for the Sections */
-
-h1 {
-    font: bold 10vmin sans-serif;
-    margin: 0;
-    white-space: nowrap;
-}
-
-.text-box {
-    height: fit-content;
-    border-radius: 5vh;
-    border: 3vh solid;
-    padding: 1vh;
-
-    color: white;
-    font-family: sans-serif;
-    font-size: 3vmin;
-}
-
-.image-container {
-    position: relative;
-    display: inline-block;
-    height: fit-content;
-    width: fit-content;
-    margin-left: 5vw;
-}
-
-.image-container::after {
-    content: '';
-    position: absolute;
-    top: 1.5vh;
-    left: 1.5vh;
-    right: -2.2vh;
-    bottom: -1.6vh;
-    border: 3px solid;
-    border-top: none;
-    border-left: none;
-    border-radius: 1.7vh;
-    transition: var(--smooth_transition);
-}
-
-.image-container:hover::after {
-    right: -1.6vh;
-    bottom: -1.2vh;
-}
-
-.connectors {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.connectors path {
-    stroke-width: 2vh;
+@media only screen and (max-width: 768px) {
+    .parallax-wrapper {
+        display: none;
+    }
 }
 
 
 /* About Section Stuff */
 :root {
     --about_color: #158472;
+}
+
+#about .split-container {
+    width: 80%;
+}
+
+@media only screen and (max-width: 768px) {
+    #about .split-container {
+        width: 90%;
+    }
 }
 
 #about h1 {
@@ -224,7 +268,7 @@ h1 {
 #about .text-box ul {
     margin: 0;
     margin-top: 2vmin;
-    padding-left: 2vw;
+    padding-left: 3.3vw;
 }
 
 #about .image-container::after{
@@ -232,7 +276,8 @@ h1 {
 }
   
 #about img {
-    height: 70vmin;
+    max-height: 70vh;
+    max-width: 48vw;
     width: auto;
     border-radius: 1.7vh;
 }
@@ -252,6 +297,11 @@ h1 {
     min-height: 50vh;
     width: 90%;
 }
+@media only screen and (max-width: 768px) {
+    #portfolio .project {
+        width: 95%;
+    }
+}
 
 .project .text-box {
     width: 40%;
@@ -262,6 +312,11 @@ h1 {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+}
+@media only screen and (max-width: 768px) {
+    .project .text-box {
+        width: 70%;
+    }
 }
 
 .project .text-box h2 {
@@ -279,14 +334,20 @@ h1 {
 
 .project .text-box, .project img {
     transition: transform 0.4s ease;
+    max-width: 100vw;
 }
 
 .project .text-box.hovered {
-    transform:  translate(-50%, -50%) scale(0.75);
+    transform: translate(-50%, -50%) scale(0.75);
+}
+@media only screen and (max-width: 768px) {
+    .project .text-box.hovered {
+        transform: translate(-50%, -50%) scale(0.82);
+    }
 }
 
 .project img.hovered {
-    transform:  translate(-50%, -50%) scale(2);
+    transform: translate(-50%, -50%) scale(2);
     z-index: 3;
 }
 
@@ -302,6 +363,53 @@ h1 {
       stroke-dashoffset: 0;
     }
 }
+
+.project#team_project {
+    height: 80vh;
+}
+.project#team_project img#img0 {
+    left: 13%; top: 20%; height: 20%;
+}
+.project#team_project img#img1 {
+    left: 68%; top: -10%; height: 20%;
+}
+@media only screen and (max-width: 768px) {
+    .project#team_project img#img0 {
+        left: 45%; top: -7%; width: 80%; height: auto;
+    }
+    .project#team_project img#img1 {
+        left: 55%; top: 35%; width: 80%; height: auto;
+    }
+}
+
+
+.project#image_rectification {
+    height: 100vh;
+}
+.project#image_rectification .text-box {
+    top: 35%;
+}
+.project#image_rectification img#img0 {
+    left: 20%; top: -30%; height: 20%;
+}
+.project#image_rectification img#img1 {
+    left: 60%; top: 40%; height: 30%;
+}
+@media only screen and (max-width: 768px) {
+    .project#image_rectification {
+        height: 90vh;
+    }
+    .project#image_rectification .text-box {
+        top: 50%;
+    }
+    .project#image_rectification img#img0 {
+        left: 40%; top: 0%; width: 70%; height: auto;
+    }
+    .project#image_rectification img#img1 {
+        left: 53%; top: 37%; width: 85%; height: auto;
+    }
+}
+
 
 
 /* Contact Me Section Stuff */

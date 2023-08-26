@@ -1,4 +1,14 @@
 
+/* MOBILE VERSION */
+const is_mobile = (navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i))
+                || window.matchMedia('(max-width: 768px)').matches;
+
 /* SECTION BACKGROUND COLOURS */
 const $window = $(window);
 const $sections = $('.section');
@@ -43,12 +53,13 @@ $main_titles.each(function() {
 });
 
 
+if (!is_mobile) {
+    window.addEventListener("load", setParallaxPos);
+    window.addEventListener("resize", setParallaxPos);
+    window.addEventListener("scroll", updateParallaxPos);
+}
 
-window.addEventListener("load", setPos);
-window.addEventListener("resize", setPos);
-window.addEventListener("scroll", updatePos);
-
-function setPos() {
+function setParallaxPos() {
     $main_titles.each(function() {
         const $main_title = $(this);
         const id = $main_title.attr("id");
@@ -83,7 +94,7 @@ function getOffset(scroll_speed) {
     return window.pageYOffset * scroll_speed;
 }
 
-function updatePos() {
+function updateParallaxPos() {
     $main_titles.each(function() {
         const id = $(this).attr("id");
         const $clones =  $clone_titles[id];
@@ -114,11 +125,13 @@ $menu_buttons.each(function() {
 
 const $menu = $(".menu-button-container");
 
-window.addEventListener("load", scrollMenu);
-window.addEventListener("resize", scrollMenu);
-window.addEventListener("scroll", scrollMenu);
+if (!is_mobile) {
+    window.addEventListener("load", scrollMenuDesktop);
+    window.addEventListener("resize", scrollMenuDesktop);
+    window.addEventListener("scroll", scrollMenuDesktop);
+}
 
-function scrollMenu() {
+function scrollMenuDesktop() {
     const screen_height = window.innerHeight;
 
     var offset = getOffset(0.4);
@@ -227,12 +240,38 @@ function setPaths () {
 
 function hoverImages(element) {
     const $siblings = $(element).siblings().addBack();
-    $siblings.addClass("hovered");
+    if (is_mobile) {
+        const $img_siblings = $siblings.filter("img");
+
+        const project = $(element).parent()[0];
+        const { 
+            x: project_x, 
+            width: project_width
+            } = project.getBoundingClientRect();
+
+        $img_siblings.each(function() {
+            const img = $(this)[0];
+            const img_dim = img.getBoundingClientRect();
+            const img_x = img_dim.x + img_dim.width / 2;
+            const img_width = img_dim.width;
+
+            const max_img_width = Math.min((img_x - project_x), (project_width - img_x + project_x)) * 2;
+            
+            if (max_img_width < img_width * 2) { //if scale(2) will go out of bounds
+                const new_transform = `translate(-50%, -50%) scale(${max_img_width / img_width})`
+                $(this).css("transform", new_transform);
+            }
+        })
+    }
+    $siblings.addClass("hovered");//scale(2)
 }
 
 function normalImages(element) {
     const $siblings = $(element).siblings().addBack();
     $siblings.removeClass("hovered");
+    $siblings.filter("img").each(function() {
+        $(this)[0].style = "";
+    })
 }
 
 
