@@ -196,7 +196,7 @@ h1 {
 #name { /* my name at the top */
     font-size: 25vmin;
     font-family: sans-serif;
-    line-height: 0.9;
+    line-height: 1;
     font-weight: bold;
     text-align: center;
     color: var(--name_colour);
